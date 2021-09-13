@@ -4,7 +4,7 @@ After the pandemic, our lives becomes more digitalized and video has been more c
 
 
 ## What it does
-![Solution slide](https://github.com/mfrashad/gancreate-saai/blob/main/images/slide-solution.PNG?raw=true)
+![Solution slide](images/gancreate-thumbnail.gif)
 Gancreate enables everyone to make videos easily. Users can quickly convert a script into an editable talking avatar and also animate it using AI motion transfer. Currently, there are 3 types of avatar, face portrait, full body 2d characters, and full body fashion models. Users can easily generate a unique avatar  using our AI models. Furthermore, you can edit its attribute such as gender, age, realism and even mix between two avatars. Once you created an avatar, simply give a script or reference video as an input and the app will animate it accordingly.
 
 
@@ -20,25 +20,25 @@ We initially launched Text2Art as a webapp at [text2art.com](https://text2art.co
 ## How we built it
 We first created 3 new image datasets to train our generative models. The reason we created a new dataset is that, there were no public StyleGAN for face modern art portrait and full body images.
 The dataset was collected by web scraping the internet using BeautifulSoup and Selenium. 
-![slide-dataset](images/slide-dataset.PNG)
+![slide-dataset](https://github.com/mfrashad/gancreate-saai/blob/main/images/slide-dataset.PNG?raw=true)
 
 
 However, the original fashion models image have noisy backgrounds and varying size, hence, we had to preprocess it first. We use a segmentation model (U2Net) to remove the background and we used person detection model (YoloV5) to detect, crop and resize the person accordingly. Once we preprocessed the data, we then trained StyleGAN2-ADA model on each of the dataset.
-![slide-preprocessing](images/slide-preprocessing.PNG)
+![slide-preprocessing](https://github.com/mfrashad/gancreate-saai/blob/main/images/slide-preprocessing.PNG?raw=true)
 
 
 After training the StyleGAN models, we use GANSpace to find meaningful direction in the StyleGAN latent space. By moving the latent code in these directions, we can semantically edit the image. Then, a video synthesis model will take the generated/edited video and a reference video as inputs and generate a video output with the motion transferred. We use First Order Motion model for face animation and Impersonator++ model for full body animation. 
 
 After generating the video, you can optionally further give a text input. A text-to-speech model (Glow-TTS) will be used to generate an audio file of the given text. Then, we use lip sync model (Wav2Lip) to synchronize the video with the generated audio. This can be done for both face and full body images.
 
-![slide-methodology](images/slide-methodology.PNG)
+![slide-methodology](https://github.com/mfrashad/gancreate-saai/blob/main/images/slide-methodology.PNG?raw=true)
 
 
 We deploy the machine learning code as an API server using FastAPI. We deploy the API server on Colab as it is the cheapest GPU service. However, Google Colab is not suitable for production and this only done for prototyping. In the future, we plan to deploy this as GPU docker container in a scalable kubernetes cluster once we have enough capital. 
 
 We use ngrok to expose the API server outside of Google Colab. Then, we made the app front-end using Flutter. Firebase is used as a message queue and for saving images.
 
-![slide-deployment](images/slide-deployment.PNG)
+![slide-deployment](https://github.com/mfrashad/gancreate-saai/blob/main/images/slide-deployment.PNG?raw=true)
 
 
 

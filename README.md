@@ -4,7 +4,9 @@ After the pandemic, our lives becomes more digitalized and video has been more c
 
 
 ## What it does
-![Solution slide](images/gancreate-thumbnail.gif)
+![Solution slide](https://github.com/mfrashad/gancreate-saai/blob/main/images/gancreate-thumbnail.gif?raw=true)
+
+
 Gancreate enables everyone to make videos easily. Users can quickly convert a script into an editable talking avatar and also animate it using AI motion transfer. Currently, there are 3 types of avatar, face portrait, full body 2d characters, and full body fashion models. Users can easily generate a unique avatar  using our AI models. Furthermore, you can edit its attribute such as gender, age, realism and even mix between two avatars. Once you created an avatar, simply give a script or reference video as an input and the app will animate it accordingly.
 
 
@@ -31,9 +33,17 @@ However, the original fashion models image have noisy backgrounds and varying si
 ![slide-preprocessing](https://github.com/mfrashad/gancreate-saai/blob/main/images/preprocessing.PNG?raw=true)
 
 
-### Video Synthesis
+### StyleGAN2 Training
+![slide-preprocessing](https://github.com/mfrashad/gancreate-saai/blob/main/images/generated-results.gif?raw=true)
 
-After training the StyleGAN models, we use GANSpace to find meaningful direction in the StyleGAN latent space. By moving the latent code in these directions, we can semantically edit the image. Then, a video synthesis model will take the generated/edited video and a reference video as inputs and generate a video output with the motion transferred. We use First Order Motion model for face animation and Impersonator++ model for full body animation. 
+
+### Semantic Editing
+After training the StyleGAN models, we use GANSpace to find meaningful direction in the StyleGAN latent space. By moving the latent code in these directions, we can semantically edit the image. 
+![slide-preprocessing](https://github.com/mfrashad/gancreate-saai/blob/main/images/character-semantic-editing.gif?raw=true)
+
+
+### Video Synthesis
+Then, a video synthesis model will take the generated/edited video and a reference video as inputs and generate a video output with the motion transferred. We use First Order Motion model for face animation and Impersonator++ model for full body animation. 
 
 After generating the video, you can optionally further give a text input. A text-to-speech model (Glow-TTS) will be used to generate an audio file of the given text. Then, we use lip sync model (Wav2Lip) to synchronize the video with the generated audio. This can be done for both face and full body images.
 
@@ -65,3 +75,8 @@ Trained our own models and integrated various ML models. We are also proud that 
 - Improve Text2Art so it can be used to edit the avatar or the video
 - Improve full body video synthesis robustness
 - Add community or social feature e.g. login, feed, profile, etc
+
+## Meet the team
+We are an international team of 2 students from Indonesia and Malaysia. 
+- Rashad: [https://www.mfrashad.com/](https://www.mfrashad.com/)
+- Tan: [https://tanlitung.github.io/](https://tanlitung.github.io/)
